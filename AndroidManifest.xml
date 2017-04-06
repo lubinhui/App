@@ -37,6 +37,9 @@
         <activity 
             android:name="com.biyesheji.android.activity.LoginActivity"
             android:screenOrientation="portrait"></activity>
+        <activity 
+            android:name="com.biyesheji.android.activity.RegisterActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -23,6 +23,7 @@ public class MineFragment extends Fragment implements OnClickListener {
 	private TextView setting;
 	private RelativeLayout dingdan;
 	private CircleImageView icon;
+	private TextView username;
     public MineFragment() {
     	
     }
@@ -38,6 +39,7 @@ public class MineFragment extends Fragment implements OnClickListener {
         setting=(TextView) view.findViewById(R.id.iv_setting);
         dingdan=(RelativeLayout) view.findViewById(R.id.rl_dingdan);
         icon=(CircleImageView) view.findViewById(R.id.icon);
+        username=(TextView) view.findViewById(R.id.username);
         setting.setOnClickListener(this);
         dingdan.setOnClickListener(this);
         icon.setOnClickListener(this);
