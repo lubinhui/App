@@ -1,16 +1,20 @@
 package com.biyesheji.android.activity;
 
+import java.util.HashMap;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.biyesheji.android.CommandApplication;
 import com.biyesheji.android.R;
-import com.biyesheji.android.utils.PreferenceHelper;
+import com.biyesheji.android.utils.MyUtils;
 
 public class LoginActivity extends Activity implements OnClickListener {
 	private EditText et_username;
@@ -41,8 +45,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 				Toast.makeText(this, "账号密码不能为空。。", Toast.LENGTH_LONG).show();
 				return;
 			}
-			break;
-
+			HashMap<String,String> map=(HashMap<String, String>) CommandApplication.getInstance().userMap;
+			String pwd = map.get(username);
+			if(TextUtils.isEmpty(pwd)){
+				Toast.makeText(this, "输入的账号或密码错误", Toast.LENGTH_LONG).show();
+				return;
+			}
+			Bundle bundle=new Bundle();
+			bundle.putString("username", username);
+			MyUtils.jumpActivity(this, UserInfoActivity.class, bundle, false);
+			finish();
 		default:
 			break;
 		}
