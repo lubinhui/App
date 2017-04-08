@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.biyesheji.android.R;
 import com.biyesheji.android.utils.MyUtils;
+import com.biyesheji.android.utils.PreferenceHelper;
 
 public class SettingActivity extends Activity implements OnClickListener {
 	private RelativeLayout userInfo;
@@ -41,6 +42,7 @@ public class SettingActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.logout:
 			MyUtils.jumpActivity(this, LoginActivity.class);
+			PreferenceHelper.clean(this, "userinfo");
 			finish();
 			break;
 

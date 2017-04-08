@@ -2,20 +2,25 @@ package com.biyesheji.android.fragment;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.biyesheji.android.R;
 import com.biyesheji.android.activity.DingdanDetailActivity;
 import com.biyesheji.android.activity.SettingActivity;
 import com.biyesheji.android.activity.UserInfoActivity;
 import com.biyesheji.android.utils.MyUtils;
+import com.biyesheji.android.utils.PreferenceHelper;
 import com.biyesheji.android.widght.CircleImageView;
 
 public class MineFragment extends Fragment implements OnClickListener {
@@ -24,6 +29,7 @@ public class MineFragment extends Fragment implements OnClickListener {
 	private RelativeLayout dingdan;
 	private CircleImageView icon;
 	private TextView username;
+	private String userName;
     public MineFragment() {
     	
     }
@@ -43,6 +49,12 @@ public class MineFragment extends Fragment implements OnClickListener {
         setting.setOnClickListener(this);
         dingdan.setOnClickListener(this);
         icon.setOnClickListener(this);
+        userName = PreferenceHelper.readString(getActivity(), "userinfo", "username");
+        if(!TextUtils.isEmpty(userName)){
+        	username.setText(userName);
+        }else{
+        	username.setText("请登录");
+        }
         return view;
     }
 
@@ -54,6 +66,11 @@ public class MineFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.iv_setting:
+			userName = PreferenceHelper.readString(getActivity(), "userinfo", "username");
+			if(TextUtils.isEmpty(userName)){
+				Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_LONG).show();
+				return;
+			}
 			MyUtils.jumpActivity(getActivity(), SettingActivity.class);
 			break;
 		case R.id.rl_dingdan:
@@ -66,4 +83,16 @@ public class MineFragment extends Fragment implements OnClickListener {
 			break;
 		}
 	}
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		userName = PreferenceHelper.readString(getActivity(), "userinfo", "username");
+		if(!TextUtils.isEmpty(userName)){
+			username.setText(userName);
+		}else{
+			username.setText("请登录");
+		}
+	}
+
 }

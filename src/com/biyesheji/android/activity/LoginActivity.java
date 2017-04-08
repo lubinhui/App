@@ -13,8 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.biyesheji.android.CommandApplication;
+import com.biyesheji.android.MainActivity;
 import com.biyesheji.android.R;
 import com.biyesheji.android.utils.MyUtils;
+import com.biyesheji.android.utils.PreferenceHelper;
 
 public class LoginActivity extends Activity implements OnClickListener {
 	private EditText et_username;
@@ -51,9 +53,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 				Toast.makeText(this, "输入的账号或密码错误", Toast.LENGTH_LONG).show();
 				return;
 			}
-			Bundle bundle=new Bundle();
-			bundle.putString("username", username);
-			MyUtils.jumpActivity(this, UserInfoActivity.class, bundle, false);
+			//bundle.putString("username", username);
+			//bundle.putBoolean("islogin", true);
+			MyUtils.jumpActivity(this, MainActivity.class);
+			PreferenceHelper.write(this, "userinfo", "username", username);
 			finish();
 		default:
 			break;
