@@ -66,17 +66,24 @@ public class MineFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.iv_setting:
-			userName = PreferenceHelper.readString(getActivity(), "userinfo", "username");
-			if(TextUtils.isEmpty(userName)){
+			if(!isLogin()){
 				Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_LONG).show();
 				return;
 			}
 			MyUtils.jumpActivity(getActivity(), SettingActivity.class);
 			break;
 		case R.id.rl_dingdan:
+			if(!isLogin()){
+				Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_LONG).show();
+				return;
+			}
 			MyUtils.jumpActivity(getActivity(), DingdanDetailActivity.class);
 			break;
 		case R.id.icon:
+			if(!isLogin()){
+				Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_LONG).show();
+				return;
+			}
 			MyUtils.jumpActivity(getActivity(), UserInfoActivity.class);
 			break;
 		default:
@@ -92,6 +99,15 @@ public class MineFragment extends Fragment implements OnClickListener {
 			username.setText(userName);
 		}else{
 			username.setText("请登录");
+		}
+	}
+	private boolean isLogin(){
+		userName = PreferenceHelper.readString(getActivity(), "userinfo", "username");
+		if(TextUtils.isEmpty(userName)){
+			Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_LONG).show();
+			return false;
+		}else{
+			return true;
 		}
 	}
 
