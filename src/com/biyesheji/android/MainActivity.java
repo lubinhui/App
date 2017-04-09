@@ -12,8 +12,8 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.biyesheji.android.fragment.CategoryFragment;
 import com.biyesheji.android.fragment.HomeFragment;
-import com.biyesheji.android.fragment.MessageFragment;
 import com.biyesheji.android.fragment.MineFragment;
 import com.biyesheji.android.fragment.ShopcartFragment;
 
@@ -53,22 +53,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
         return true;
     }
     private void initFragment() {
-        //Ê×Ò³
         HomeFragment homeFragment =new HomeFragment();
-        //¹ºÎï³µ
         ShopcartFragment shopcartFragment =new ShopcartFragment();
-        //ÏûÏ¢
-        MessageFragment messageFragment =new MessageFragment();
-        //¸öÈËÖĞĞÄ
+        //MessageFragment messageFragment =new MessageFragment();
+        CategoryFragment categoryFragment=new CategoryFragment();
         MineFragment mineFragment =new MineFragment();
-        //Ìí¼Óµ½Êı×é
-        mFragments = new Fragment[]{homeFragment,shopcartFragment,messageFragment,mineFragment};
-        //¿ªÆôÊÂÎñ
+        mFragments = new Fragment[]{homeFragment,shopcartFragment,categoryFragment,mineFragment};
         FragmentTransaction ft =
                 getSupportFragmentManager().beginTransaction();
-        //Ìí¼ÓÊ×Ò³
         ft.add(R.id.content,homeFragment).commit();
-        //Ä¬ÈÏÉèÖÃÎªµÚ0¸ö
         setIndexSelected(0);
     }
 
@@ -80,16 +73,16 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
         }
         FragmentManager    fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft              = fragmentManager.beginTransaction();
-        //Òş²Ø
+        //ï¿½ï¿½ï¿½ï¿½
         ft.hide(mFragments[mIndex]);
-        //ÅĞ¶ÏÊÇ·ñÌí¼Ó
+        //ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
         if(!mFragments[index].isAdded()){
             ft.add(R.id.content,mFragments[index]).show(mFragments[index]);
         }else {
             ft.show(mFragments[index]);
         }
         ft.commit();
-        //ÔÙ´Î¸³Öµ
+        //ï¿½Ù´Î¸ï¿½Öµ
         mIndex=index;
     }
     public void onClick(View view) {
