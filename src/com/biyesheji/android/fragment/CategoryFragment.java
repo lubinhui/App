@@ -40,6 +40,7 @@ public class CategoryFragment extends Fragment {
 	private ArrayList<CategoryData> listCategorys;
 	private CategoryLeftListAdapter listAdapter;
 	private int selectedPosition;
+	private String[] names=new String[]{"女装","箱包","美妆","男装","鞋靴","内衣配饰","手机数码","家电","食品"};
 	/**
 	 * 右边网格有关
 	 */
@@ -153,10 +154,10 @@ public class CategoryFragment extends Fragment {
 		ArrayList<CategoryData> list = new ArrayList<CategoryData>();
 		// //////////////////////////////////////
 		// //////////////假数据///////////////////
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < names.length; i++) {
 			CategoryData data = new CategoryData();
 			data.setId(i);
-			data.setName("分类" + i);
+			data.setName(names[i]);
 			list.add(data);
 		}
 		// //////////////////////////////////////

@@ -12,10 +12,10 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.biyesheji.android.fragment.CartFragment;
 import com.biyesheji.android.fragment.CategoryFragment;
 import com.biyesheji.android.fragment.HomeFragment;
 import com.biyesheji.android.fragment.MineFragment;
-import com.biyesheji.android.fragment.ShopcartFragment;
 
 public class MainActivity extends FragmentActivity implements OnClickListener{
 
@@ -54,7 +54,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
     }
     private void initFragment() {
         HomeFragment homeFragment =new HomeFragment();
-        ShopcartFragment shopcartFragment =new ShopcartFragment();
+        CartFragment shopcartFragment =new CartFragment();
         //MessageFragment messageFragment =new MessageFragment();
         CategoryFragment categoryFragment=new CategoryFragment();
         MineFragment mineFragment =new MineFragment();
