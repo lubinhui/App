@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.biyesheji.android.R;
 import com.biyesheji.android.activity.DingdanDetailActivity;
+import com.biyesheji.android.activity.LoginActivity;
 import com.biyesheji.android.activity.SettingActivity;
 import com.biyesheji.android.activity.UserInfoActivity;
 import com.biyesheji.android.utils.MyUtils;
@@ -79,8 +80,8 @@ public class MineFragment extends Fragment implements OnClickListener {
 			break;
 		case R.id.icon:
 			if(!isLogin()){
-				Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_LONG).show();
-				return;
+				MyUtils.jumpActivity(getActivity(), LoginActivity.class);
+				getActivity().finish();
 			}
 			MyUtils.jumpActivity(getActivity(), UserInfoActivity.class);
 			break;
