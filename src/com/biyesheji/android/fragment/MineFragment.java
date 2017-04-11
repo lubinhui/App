@@ -81,9 +81,10 @@ public class MineFragment extends Fragment implements OnClickListener {
 		case R.id.icon:
 			if(!isLogin()){
 				MyUtils.jumpActivity(getActivity(), LoginActivity.class);
-				getActivity().finish();
+				//getActivity().finish();
+			}else{
+				MyUtils.jumpActivity(getActivity(), UserInfoActivity.class);
 			}
-			MyUtils.jumpActivity(getActivity(), UserInfoActivity.class);
 			break;
 		default:
 			break;

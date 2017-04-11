@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.biyesheji.android.CommandApplication;
 import com.biyesheji.android.MainActivity;
 import com.biyesheji.android.R;
+import com.biyesheji.android.model.Global;
 import com.biyesheji.android.utils.MyUtils;
 import com.biyesheji.android.utils.PreferenceHelper;
 
@@ -57,6 +58,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			//bundle.putBoolean("islogin", true);
 			MyUtils.jumpActivity(this, MainActivity.class);
 			PreferenceHelper.write(this, "userinfo", "username", username);
+			Global.isLogin=true;
 			finish();
 		default:
 			break;
