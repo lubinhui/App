@@ -10,6 +10,7 @@
   	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />  
     <application
         android:name="com.biyesheji.android.CommandApplication"
         android:allowBackup="true"
@@ -46,6 +47,8 @@
         <activity 
             android:name="com.biyesheji.android.activity.HomeDetailActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.biyesheji.android.activity.RegistActivity"></activity>
     </application>
 
 </manifest>

@@ -1,11 +1,11 @@
 package com.biyesheji.android.activity;
 
 import java.util.HashMap;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -16,13 +16,15 @@ import com.biyesheji.android.CommandApplication;
 import com.biyesheji.android.MainActivity;
 import com.biyesheji.android.R;
 import com.biyesheji.android.model.Global;
+import com.biyesheji.android.model.UserModel;
+import com.biyesheji.android.utils.InputUtil;
 import com.biyesheji.android.utils.MyUtils;
-import com.biyesheji.android.utils.PreferenceHelper;
 
 public class LoginActivity extends Activity implements OnClickListener {
 	private EditText et_username;
 	private EditText et_password;
 	private TextView tv_login;
+	private TextView regist;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -35,7 +37,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 		et_username=(EditText) findViewById(R.id.et_username);
 		et_password=(EditText) findViewById(R.id.et_password);
 		tv_login=(TextView) findViewById(R.id.tv_login);
+		regist = (TextView) findViewById(R.id.regist);
 		tv_login.setOnClickListener(this);
+		regist.setOnClickListener(this);
 	}
 
 	@Override
@@ -48,18 +52,37 @@ public class LoginActivity extends Activity implements OnClickListener {
 				Toast.makeText(this, "账号密码不能为空。。", Toast.LENGTH_LONG).show();
 				return;
 			}
-			HashMap<String,String> map=(HashMap<String, String>) CommandApplication.getInstance().userMap;
-			String pwd = map.get(username);
-			if(TextUtils.isEmpty(pwd)){
+			//HashMap<String,String> map=(HashMap<String, String>) CommandApplication.getInstance().userMap;
+			//String pwd = map.get(username);
+			/*if(TextUtils.isEmpty(pwd)){
 				Toast.makeText(this, "输入的账号或密码错误", Toast.LENGTH_LONG).show();
 				return;
-			}
+			}*/
 			//bundle.putString("username", username);
 			//bundle.putBoolean("islogin", true);
-			MyUtils.jumpActivity(this, MainActivity.class);
-			PreferenceHelper.write(this, "userinfo", "username", username);
-			Global.isLogin=true;
-			finish();
+			InputUtil<UserModel> input = new InputUtil<UserModel>();
+			List<UserModel> userList = input.readListFromSdCard("userList");
+			for (UserModel userModel : userList) {
+				if(userModel.userName.equals(username)||userModel.phone.equals(username)){
+					if(userModel.passWord.equals(password)){
+						MyUtils.jumpActivity(this, MainActivity.class);
+						Global.isLogin=true;
+						finish();
+					}else{
+						Toast.makeText(this, "密码不对", Toast.LENGTH_SHORT).show();
+					}
+					return;
+					
+				}
+				Toast.makeText(this, "该用户不存在", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
+			//PreferenceHelper.write(this, "userinfo", "username", username);
+			break;
+		case R.id.regist:
+			MyUtils.jumpActivity(this, RegisterActivity.class);
+			break;
 		default:
 			break;
 		}
