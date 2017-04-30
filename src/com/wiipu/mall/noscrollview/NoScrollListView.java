@@ -1,23 +1,23 @@
-package com.biyesheji.android.network.noscrollview;
+package com.wiipu.mall.noscrollview;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.GridView;
+import android.widget.ListView;
 
 /**
- * 解决ScrollView中包含GridView时滑动事件的冲突
+ * 解决ScrollView中包含ListView时滑动事件的冲突
  */
-public class NoScrollGridView extends GridView {
+public class NoScrollListView extends ListView {
 
-	public NoScrollGridView(Context context) {
+	public NoScrollListView(Context context) {
 		super(context);
 	}
 
-	public NoScrollGridView(Context context, AttributeSet attrs) {
+	public NoScrollListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
-	public NoScrollGridView(Context context, AttributeSet attrs, int defStyle) {
+	public NoScrollListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 

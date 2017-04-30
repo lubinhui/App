@@ -1,35 +1,79 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:orientation="vertical"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
 
-	<RelativeLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="45dp"
-	    android:background="@color/actionbar_color"
-	    >
-	    <TextView 
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_centerInParent="true"
-	        android:text="首页"
-	        android:textSize="18sp"
-	        android:textColor="@color/white"
-	        />
-	    <View 
-	        android:layout_width="match_parent"
-	        android:layout_height="0.5dp"
-	        android:background="#999999"
-	        android:layout_alignParentBottom="true"
-	        />
-	</RelativeLayout>
-	    <TextView
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="主页Home"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-</LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp" >
+
+                <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
+                    android:id="@+id/home_viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <com.viewpagerindicator.CirclePageIndicator
+                    android:id="@+id/home_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="10dp" />
+                
+            </FrameLayout>
+
+            <com.wiipu.mall.noscrollview.NoScrollListView
+                android:id="@+id/home_lv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp" />
+            
+        </LinearLayout>
+        
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp" >
+
+        <EditText
+            android:id="@+id/home_top_et_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_input_search"
+            android:hint="@string/find_et_hint"
+            android:textColorHint="@color/gray"
+            android:singleLine="true"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/home_top_ib_search"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:background="#00000000"
+            android:contentDescription="@string/search"
+            android:scaleType="centerInside"
+            android:src="@drawable/top_search_icon" />
+        
+    </LinearLayout>
+
+</FrameLayout>

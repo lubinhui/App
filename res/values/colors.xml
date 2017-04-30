@@ -8,11 +8,12 @@
     <color name="actionbar_background_end">#ffffff</color>
     <color name="actionbar_background_item_pressed_start">#FF7F00</color>
     <color name="actionbar_background_item_pressed_end">#EE7600</color>
-    <color name="white">#ffffff</color>
     <color name="actionbar_color">#FF0714</color>
     <color name="gray">#AAAAAA</color>
-    <color name="bg_gray">#EEEEEE</color>
+    <color name="red">#FF0000</color>
+    <color name="white">#FFFFFF</color>
     <color name="divide_line">#cccccc</color>
-     <color name="red">#FF0000</color>
-     <color name="black">#000000</color>
+    <color name="bg_gray">#EEEEEE</color>
+    <color name="black">#000000</color>
+     
 </resources>
