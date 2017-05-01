@@ -19,6 +19,7 @@ import com.biyesheji.android.model.Global;
 import com.biyesheji.android.model.UserModel;
 import com.biyesheji.android.utils.InputUtil;
 import com.biyesheji.android.utils.MyUtils;
+import com.biyesheji.android.utils.OutputUtil;
 
 public class LoginActivity extends Activity implements OnClickListener {
 	private EditText et_username;
@@ -65,8 +66,13 @@ public class LoginActivity extends Activity implements OnClickListener {
 			for (UserModel userModel : userList) {
 				if(userModel.userName.equals(username)||userModel.phone.equals(username)){
 					if(userModel.passWord.equals(password)){
-						MyUtils.jumpActivity(this, MainActivity.class);
 						Global.isLogin=true;
+						Bundle bundle = new Bundle();
+						//bundle.putString("username", username);
+						//bundle.putBoolean("islogin", true);
+						OutputUtil<UserModel> outputUtils = new OutputUtil<UserModel>();
+						outputUtils.writObjectIntoSDcard("userModel", userModel);
+						MyUtils.jumpActivity(this, MainActivity.class,bundle,false);
 						finish();
 					}else{
 						Toast.makeText(this, "密码不对", Toast.LENGTH_SHORT).show();

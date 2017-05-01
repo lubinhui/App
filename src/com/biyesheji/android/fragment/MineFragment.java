@@ -18,6 +18,8 @@ import com.biyesheji.android.activity.DingdanDetailActivity;
 import com.biyesheji.android.activity.LoginActivity;
 import com.biyesheji.android.activity.SettingActivity;
 import com.biyesheji.android.activity.UserInfoActivity;
+import com.biyesheji.android.model.UserModel;
+import com.biyesheji.android.utils.InputUtil;
 import com.biyesheji.android.utils.MyUtils;
 import com.biyesheji.android.utils.PreferenceHelper;
 import com.biyesheji.android.widght.CircleImageView;
@@ -48,7 +50,14 @@ public class MineFragment extends Fragment implements OnClickListener {
         setting.setOnClickListener(this);
         dingdan.setOnClickListener(this);
         icon.setOnClickListener(this);
-        userName = PreferenceHelper.readString(getActivity(), "userinfo", "username");
+        //userName = PreferenceHelper.readString(getActivity(), "userinfo", "username");
+        InputUtil<UserModel> inputUtils = new InputUtil<UserModel>();
+        UserModel userModel = inputUtils.readObjectFromSdCard("userModel");
+        if(userModel!=null){
+        	userName=userModel.userName;        	
+        }else{
+        	userName="";
+        }
         if(!TextUtils.isEmpty(userName)){
         	username.setText(userName);
         }else{
@@ -94,19 +103,24 @@ public class MineFragment extends Fragment implements OnClickListener {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		userName = PreferenceHelper.readString(getActivity(), "userinfo", "username");
-		if(!TextUtils.isEmpty(userName)){
+		//userName = PreferenceHelper.readString(getActivity(), "userinfo", "username");
+		InputUtil<UserModel> inputUtils = new InputUtil<UserModel>();
+		UserModel userModel = inputUtils.readObjectFromSdCard("userModel");
+		if(userModel!=null){
+			userName=userModel.userName;
 			username.setText(userName);
 		}else{
 			username.setText("请登录");
 		}
 	}
 	private boolean isLogin(){
-		userName = PreferenceHelper.readString(getActivity(), "userinfo", "username");
-		if(TextUtils.isEmpty(userName)){
+		InputUtil<UserModel> inputUtils = new InputUtil<UserModel>();
+		UserModel userModel = inputUtils.readObjectFromSdCard("userModel");
+		if(userModel==null){
 			Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_LONG).show();
 			return false;
-		}else{
+		}
+		else{
 			return true;
 		}
 	}
