@@ -79,10 +79,14 @@ public class HomeListAdapter extends UniversalAdapter<HomeFloorData> {
 					ProductData product = (ProductData) parent.getItemAtPosition(position);
 					String info=product.getInfo();
 					float price = product.getPrice();
+					String imgUrl = product.getImgUrl();
+					int id2 = product.getId();
 					ArrayList<String> lists = map.get(position);
 					bundle.putStringArrayList("key", lists);
 					bundle.putString("info", info);
 					bundle.putFloat("price", price);
+					bundle.putString("imgUrl", imgUrl);
+					bundle.putInt("id", id2);
 					MyUtils.jumpActivity(context, HomeDetailActivity.class,bundle,false);
 				}
 			});

@@ -1,10 +1,12 @@
 package com.biyesheji.android.fragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +26,8 @@ import com.biyesheji.android.adapter.CartListAdapter;
 import com.biyesheji.android.adapter.CartListAdapter.OnPriceChangedListener;
 import com.biyesheji.android.model.Global;
 import com.biyesheji.android.model.ProductData;
+import com.biyesheji.android.model.UserModel;
+import com.biyesheji.android.utils.InputUtil;
 
 
 /**
@@ -58,6 +62,7 @@ public class CartFragment extends Fragment {
 	private CheckBox cbCheckAll;
 	private TextView tvTotal;
 	private Button btnBuy;
+	private ArrayList<ProductData> ll;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +76,9 @@ public class CartFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		if (Global.isLogin) {
+		InputUtil<UserModel> inputUtils = new InputUtil<UserModel>();
+		UserModel userModel = inputUtils.readObjectFromSdCard("userModel");
+		if (userModel!=null) {
 			// 已登录
 			// 隐藏提示登录的布局
 			suggestLayout.setVisibility(View.GONE);
@@ -199,17 +206,27 @@ public class CartFragment extends Fragment {
 	 * 从服务器获取购物车商品数据
 	 */
 	private void getCartProducts() {
-		ArrayList<ProductData> list = new ArrayList<ProductData>();
-		for (int i = 0; i < 5; i++) {
+		List<ProductData> list = new ArrayList<ProductData>();
+		/*for (int i = 0; i < 5; i++) {
 			ProductData data = new ProductData();
 			data.setId(i);
 			data.setImgUrl("http://b.hiphotos.baidu.com/image/pic/item/14ce36d3d539b6006bae3d86ea50352ac65cb79a.jpg");
 			data.setInfo("上岛咖啡上岛咖啡上岛咖啡上岛咖啡上岛咖啡上岛咖啡");
 			data.setPrice(120);
 			list.add(data);
+		}*/
+		InputUtil<ProductData> inputUtil = new InputUtil<ProductData>();
+		InputUtil<UserModel> inPutUser = new InputUtil<UserModel>();
+		UserModel userModel = inPutUser.readObjectFromSdCard("userModel");
+		if(userModel!=null) {
+			  ll = (ArrayList<ProductData>) inputUtil.readListFromSdCard(userModel.phone);
 		}
-		products.clear();
-		products.addAll(list);
+		
+		if(ll!=null){
+			products.clear();
+			products.addAll(ll);
+		}
+		
 		for (int i = 0; i < products.size(); i++) {
 			adapter.getIsChecked().put(i, true);
 			adapter.getNums().put(i, 1);
@@ -240,4 +257,32 @@ public class CartFragment extends Fragment {
 		}
 	}
 
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		if(!hidden){
+			Log.e("lbh", "+++++++++unHidden++++++++");
+			InputUtil<UserModel> inputUtils = new InputUtil<UserModel>();
+			UserModel userModel = inputUtils.readObjectFromSdCard("userModel");
+			if (userModel!=null) {
+				// 已登录
+				// 隐藏提示登录的布局
+				suggestLayout.setVisibility(View.GONE);
+				getCartProducts();
+			} else {
+				// 未登录
+				// 隐藏编辑按钮
+				btnEdit.setVisibility(View.GONE);
+				// 隐藏购物车列表
+				listLayout.setVisibility(View.GONE);
+				// 隐藏底部付款布局
+				checkLayout.setVisibility(View.GONE);
+				// 显示提示登录的布局
+				suggestLayout.setVisibility(View.VISIBLE);
+				// 显示购物车为空的布局
+				tvEmpty.setVisibility(View.VISIBLE);
+			}
+		}else{
+			Log.e("lbh", "++++++++++Hidden+++++++++");
+		}
+	}
 }

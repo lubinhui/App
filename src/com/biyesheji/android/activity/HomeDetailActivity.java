@@ -1,6 +1,7 @@
 package com.biyesheji.android.activity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,10 +12,15 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.biyesheji.android.R;
+import com.biyesheji.android.model.ProductData;
+import com.biyesheji.android.model.UserModel;
 import com.biyesheji.android.network.NetworkManager;
+import com.biyesheji.android.utils.InputUtil;
+import com.biyesheji.android.utils.OutputUtil;
 
 public class HomeDetailActivity extends Activity implements OnClickListener{
 
@@ -27,6 +33,9 @@ public class HomeDetailActivity extends Activity implements OnClickListener{
 	private TextView price;
 	private String info;
 	private float priceNum;
+	private String imgUrl;
+	private int id;
+	List<ProductData> list = new ArrayList<ProductData>();
 	private TextView addCart;
 	private TextView buy;
 	@Override
@@ -38,6 +47,8 @@ public class HomeDetailActivity extends Activity implements OnClickListener{
 		alists = bundle.getStringArrayList("key");
 		info = bundle.getString("info");
 		priceNum = bundle.getFloat("price");
+		imgUrl = bundle.getString("imgUrl");
+		id = bundle.getInt("id");
 		}
 		initView();
 	}
@@ -102,7 +113,31 @@ public class HomeDetailActivity extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.addCart:
-			
+			ProductData productData = new ProductData();
+			productData.setImgUrl(imgUrl);
+			productData.setInfo(info);
+			productData.setPrice(priceNum);
+			productData.setId(id);
+			InputUtil<UserModel> userInfo = new InputUtil<UserModel>();
+			UserModel userModel = userInfo.readObjectFromSdCard("userModel");
+ 			if(userModel==null){
+				Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
+				return;
+			}
+ 			
+			InputUtil<ProductData> inputUtils = new InputUtil<ProductData>();
+			List<ProductData> cartList = inputUtils.readListFromSdCard(userModel.phone);
+			if(cartList==null){
+				cartList=list;
+			}
+			cartList.add(productData);
+			OutputUtil<ProductData> outputUtils = new OutputUtil<ProductData>();
+			boolean isSuccess = outputUtils.writeListIntoSDcard(userModel.phone, cartList);
+			if(isSuccess){
+				Toast.makeText(this, "已添加至购物车", Toast.LENGTH_SHORT).show();				
+			}else{
+				Toast.makeText(this, "添加至购物车失败", Toast.LENGTH_SHORT).show();	
+			}
 			break;
 			
 		case R.id.buybuybuy:

@@ -72,7 +72,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 						//bundle.putBoolean("islogin", true);
 						OutputUtil<UserModel> outputUtils = new OutputUtil<UserModel>();
 						outputUtils.writObjectIntoSDcard("userModel", userModel);
-						MyUtils.jumpActivity(this, MainActivity.class,bundle,false);
+						MyUtils.jumpActivity(this, MainActivity.class);
 						finish();
 					}else{
 						Toast.makeText(this, "密码不对", Toast.LENGTH_SHORT).show();

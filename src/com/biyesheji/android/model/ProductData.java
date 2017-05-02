@@ -1,9 +1,11 @@
 package com.biyesheji.android.model;
 
+import java.io.Serializable;
+
 /**
  * 商品数据
  */
-public class ProductData {
+public class ProductData implements Serializable{
 
 	/**
 	 * 商品id

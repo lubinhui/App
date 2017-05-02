@@ -42,7 +42,8 @@ public class SettingActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.logout:
 			MyUtils.jumpActivity(this, LoginActivity.class);
-			PreferenceHelper.clean(this, "userinfo");
+			//PreferenceHelper.clean(this, "userinfo");
+			PreferenceHelper.clean(this, "userModel");
 			finish();
 			break;
 
