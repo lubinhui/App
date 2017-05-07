@@ -139,5 +139,15 @@ public  class InputUtil<T> {
             return null;  
         }  
     }  
+    public void deldeFile(String name){
+    	if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+    		File sdCardDir = Environment.getExternalStorageDirectory(); 
+    		File file = new File(sdCardDir, name);
+    		if (file.isFile()&&file.exists()){
+    			file.delete();
+    		}
+    	}
+    	  
+    }
       
 }  

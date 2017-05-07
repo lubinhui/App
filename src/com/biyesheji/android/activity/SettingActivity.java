@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.biyesheji.android.R;
+import com.biyesheji.android.utils.InputUtil;
 import com.biyesheji.android.utils.MyUtils;
 import com.biyesheji.android.utils.PreferenceHelper;
 
@@ -43,7 +44,9 @@ public class SettingActivity extends Activity implements OnClickListener {
 		case R.id.logout:
 			MyUtils.jumpActivity(this, LoginActivity.class);
 			//PreferenceHelper.clean(this, "userinfo");
-			PreferenceHelper.clean(this, "userModel");
+			//PreferenceHelper.clean(this, "userModel");
+			InputUtil inputUtil =new InputUtil();
+			inputUtil.deldeFile("userModel");
 			finish();
 			break;
 
