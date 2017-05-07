@@ -49,6 +49,8 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.biyesheji.android.activity.RegistActivity"></activity>
+        <activity android:name="com.biyesheji.android.activity.DingdanActivity"></activity>
+        <activity android:name="com.biyesheji.android.activity.DingDanSuccessActivity"></activity>
     </application>
 
 </manifest>

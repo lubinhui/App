@@ -11,46 +11,32 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.biyesheji.android.R;
+import com.biyesheji.android.adapter.DingdanAdapter;
 import com.biyesheji.android.model.DingdanModel;
+import com.biyesheji.android.model.ProductData;
+import com.biyesheji.android.utils.InputUtil;
 
 public class DingdanDetailActivity extends Activity {
 	private ListView mListView;
-	private List<DingdanModel> mList;
+	private List<ProductData> mList;
+	private DingdanAdapter mDingdanAdapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dingdan_detail);
 		mListView=(ListView) findViewById(R.id.listview);
-		mList=new ArrayList<DingdanModel>();
 		initData();
 	}
 	private void initData() {
-		
-	}
-	private class MyAdapter extends BaseAdapter{
-
-		@Override
-		public int getCount() {
-			return mList.size();
+		InputUtil<ProductData> inputUtil = new InputUtil<ProductData>();
+		mList = inputUtil.readListFromSdCard("dingdan");
+		if (mList == null){
+			mList = new ArrayList<ProductData>();
+		}else{
+			mDingdanAdapter = new DingdanAdapter(this, mList);
 		}
-
-		@Override
-		public Object getItem(int position) {
-			return null;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return 0;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			
-			return null;
-		}
-		
+		mListView.setAdapter(mDingdanAdapter);
 	}
 
 }

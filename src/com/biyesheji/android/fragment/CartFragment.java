@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -95,6 +96,7 @@ public class CartFragment extends Fragment {
 			suggestLayout.setVisibility(View.VISIBLE);
 			// 显示购物车为空的布局
 			tvEmpty.setVisibility(View.VISIBLE);
+			
 		}
 	}
 
@@ -136,6 +138,9 @@ public class CartFragment extends Fragment {
 				.findViewById(R.id.cart_suggest_layout);
 		btnLogin = (Button) view.findViewById(R.id.cart_btn_login);
 		btnLogin.setOnClickListener(new OnClickListener() {
+			private long insertDataBySql;
+			private Cursor queryData;
+
 			@Override
 			public void onClick(View v) {
 				// 跳转登录界面

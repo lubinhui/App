@@ -20,6 +20,7 @@ import com.biyesheji.android.model.ProductData;
 import com.biyesheji.android.model.UserModel;
 import com.biyesheji.android.network.NetworkManager;
 import com.biyesheji.android.utils.InputUtil;
+import com.biyesheji.android.utils.MyUtils;
 import com.biyesheji.android.utils.OutputUtil;
 
 public class HomeDetailActivity extends Activity implements OnClickListener{
@@ -141,7 +142,11 @@ public class HomeDetailActivity extends Activity implements OnClickListener{
 			break;
 			
 		case R.id.buybuybuy:
-			
+			Bundle bundle = new Bundle();
+			bundle.putString("imgurl", imgUrl);
+			bundle.putString("price", priceNum+"");
+			bundle.putString("info", info);
+			MyUtils.jumpActivity(this, DingdanActivity.class,bundle,false);
 			break;
 
 		default:
