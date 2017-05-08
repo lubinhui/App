@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,6 +35,7 @@ public class DingdanActivity extends Activity {
 	private TextView yunfei2;
 	private TextView wuyou2;
 	private List<ProductData> dingdanList;
+	private TextView address;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,7 @@ public class DingdanActivity extends Activity {
 		productPrc = (TextView) findViewById(R.id.productPrc);
 		yunfei2 = (TextView) findViewById(R.id.yunfei);
 		wuyou2 = (TextView) findViewById(R.id.wuyou);
-		
+		address = (TextView) findViewById(R.id.address);
 		submit.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -89,5 +91,32 @@ public class DingdanActivity extends Activity {
 				MyUtils.jumpActivity(DingdanActivity.this, DingDanSuccessActivity.class);
 			}
 		});
+		address.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {		
+				//MyUtils.jumpActivity(DingdanActivity.this, AddressActivity.class);
+				Intent intent = new Intent();
+				
+
+				intent.setClass(DingdanActivity.this, AddressActivity.class);
+				//if (bTop) {
+					intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				//}
+
+				DingdanActivity.this.startActivityForResult(intent, 1);;
+				
+			}
+		});
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode==1&&resultCode==1){
+			String string = data.getExtras().getString("address");
+			address.setText(string);
+		}
 	}
 }

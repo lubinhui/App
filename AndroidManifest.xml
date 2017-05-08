@@ -51,6 +51,12 @@
             android:name="com.biyesheji.android.activity.RegistActivity"></activity>
         <activity android:name="com.biyesheji.android.activity.DingdanActivity"></activity>
         <activity android:name="com.biyesheji.android.activity.DingDanSuccessActivity"></activity>
+    	<activity 
+    	    android:name="com.biyesheji.android.activity.AddressActivity"
+    	    ></activity>
+    	<activity 
+    	    android:name="com.biyesheji.android.activity.AddAddressActivity"
+    	    ></activity>
     </application>
 
 </manifest>
